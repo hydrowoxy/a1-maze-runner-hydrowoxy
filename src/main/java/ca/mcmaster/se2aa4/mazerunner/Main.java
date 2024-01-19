@@ -12,10 +12,10 @@ public class Main {
     public static void main(String[] args) {
 
         Options options = new Options();
-
         options.addOption("i", "input", true, "Input file");
 
         CommandLineParser parser = new DefaultParser();
+
         try {
             CommandLine cmd = parser.parse(options, args);
 
@@ -27,7 +27,7 @@ public class Main {
                 try {
                     
                     Maze maze = new Maze();
-                    maze.readFile(inputFile);
+                    maze.read(inputFile);
                     maze.disp();
 
                     Path path = new Path(maze);
@@ -39,6 +39,7 @@ public class Main {
                     e.printStackTrace();
                 }
             }
+
         } catch (ParseException e) {
             System.err.println("Error parsing command line options: " + e.getMessage());
         }
