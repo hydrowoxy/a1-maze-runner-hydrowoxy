@@ -6,6 +6,8 @@ import org.apache.logging.log4j.Logger;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 
 public class Maze {
 
@@ -17,15 +19,24 @@ public class Maze {
     }
 
     public void read(String inputFile) throws IOException {
-        logger.info("**** Reading the maze from file " + inputFile);
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(inputFile))) {
+            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
             String line;
-            int idx = 0;
+            int row = 0;
+    
             while ((line = reader.readLine()) != null) {
-                mazeArr[idx++] = line.toCharArray();
+                row++;
             }
-        }
+    
+            reader.close();
+            reader = new BufferedReader(new FileReader(inputFile));
+    
+            mazeArr = new char[row][];
+
+            int currentRow = 0;
+            while ((line = reader.readLine()) != null) {
+                mazeArr[currentRow] = line.toCharArray();
+                currentRow++;
+            }
     }
 
     public void disp() {
