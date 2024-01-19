@@ -38,6 +38,9 @@ public class Main {
                     logger.error("/!\\ An error has occurred while reading the file /!\\");
                     e.printStackTrace();
                 }
+                
+                logger.info("** End of MazeRunner");
+
             }
 
         } catch (ParseException e) {

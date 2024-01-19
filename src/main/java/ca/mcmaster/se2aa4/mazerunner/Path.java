@@ -15,11 +15,10 @@ public class Path {
     public void compute() {
         logger.info("**** Computing path");
         logger.info("PATH NOT COMPUTED");
-        logger.info("** End of MazeRunner");
     }
 
     public void disp() {
-        
+
     }
 
 }

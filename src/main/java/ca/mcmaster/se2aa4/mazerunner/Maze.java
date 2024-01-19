@@ -6,8 +6,6 @@ import org.apache.logging.log4j.Logger;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 
 public class Maze {
 
@@ -19,6 +17,8 @@ public class Maze {
     }
 
     public void read(String inputFile) throws IOException {
+            logger.info("**** Reading the maze from file " + inputFile);
+
             BufferedReader reader = new BufferedReader(new FileReader(inputFile));
             String line;
             int row = 0;
