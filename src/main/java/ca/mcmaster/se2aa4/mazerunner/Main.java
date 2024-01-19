@@ -1,7 +1,5 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,28 +23,21 @@ public class Main {
                 String inputFile = cmd.getOptionValue("i", cmd.getOptionValue("input"));
                 
                 logger.info("** Starting Maze Runner");
-                logger.info("**** Reading the maze from file " + inputFile);
 
-                try (BufferedReader reader = new BufferedReader(new FileReader(inputFile))) {
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        for (int idx = 0; idx < line.length(); idx++) {
-                            if (line.charAt(idx) == '#') {
-                                System.out.print("WALL ");
-                            } else if (line.charAt(idx) == ' ') {
-                                System.out.print("PASS ");
-                            }
-                        }
-                        System.out.print(System.lineSeparator());
-                    }
+                try {
+                    
+                    Maze maze = new Maze();
+                    maze.readFile(inputFile);
+                    maze.disp();
+
+                    Path path = new Path(maze);
+                    path.compute();
+                    path.disp();
+
                 } catch (Exception e) {
                     logger.error("/!\\ An error has occurred while reading the file /!\\");
                     e.printStackTrace();
                 }
-
-                logger.info("**** Computing path");
-                logger.info("PATH NOT COMPUTED");
-                logger.info("** End of MazeRunner");
             }
         } catch (ParseException e) {
             System.err.println("Error parsing command line options: " + e.getMessage());
