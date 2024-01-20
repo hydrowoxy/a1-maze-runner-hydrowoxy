@@ -24,21 +24,14 @@ public class Main {
                 
                 logger.info("** Starting Maze Runner");
 
-                try {
-                    
-                    Maze maze = new Maze();
-                    maze.read(inputFile);
-                    maze.disp();
+                Maze maze = new Maze();
+                maze.read(inputFile);
+                maze.disp();
 
-                    Path path = new Path(maze);
-                    path.compute();
-                    path.disp();
+                Path path = new Path(maze);
+                path.compute();
+                path.disp();
 
-                } catch (Exception e) {
-                    logger.error("/!\\ An error has occurred while reading the file /!\\");
-                    e.printStackTrace();
-                }
-                
                 logger.info("** End of MazeRunner");
 
             }

@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 
 public class Maze {
 
@@ -16,7 +15,9 @@ public class Maze {
         // Constructor empty for now
     }
 
-    public void read(String inputFile) throws IOException {
+    public void read(String inputFile) {
+        try {
+
             logger.info("**** Reading the maze from file " + inputFile);
 
             BufferedReader reader = new BufferedReader(new FileReader(inputFile));
@@ -37,6 +38,13 @@ public class Maze {
                 mazeArr[currentRow] = line.toCharArray();
                 currentRow++;
             }
+
+        } catch(Exception e) {
+            
+            logger.error("/!\\ An error has occurred while reading the file /!\\");
+            e.printStackTrace();
+
+        }
     }
 
     public void disp() {
