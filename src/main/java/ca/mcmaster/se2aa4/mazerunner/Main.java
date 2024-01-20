@@ -26,13 +26,16 @@ public class Main {
 
                 logger.info("** Starting Maze Runner");
 
+                // NO LOGS ACTIVATED
                 Maze maze = new Maze();
                 maze.read(inputFile);
-                maze.disp();
+                maze.rightHand();
+                maze.dispPath();
 
+                // PATH VERIFICATION MODE
                 if (cmd.hasOption("p") || cmd.hasOption("path")) {
-                    Path path = new Path(maze);
-                    path.compute();
+                    VerifyPath path = new VerifyPath(maze);
+                    path.verify();
                     path.disp();
                 }
 
