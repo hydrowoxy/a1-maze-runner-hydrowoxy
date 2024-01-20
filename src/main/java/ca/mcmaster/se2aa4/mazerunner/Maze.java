@@ -47,17 +47,15 @@ public class Maze {
         }
     }
 
-    public void disp() {
-        for(char[] row : mazeArr) {
-            for(char item : row) {
-                if (item == '#') {
-                    System.out.print("WALL ");
-                } else if (item == ' ') {
-                    System.out.print("PASS ");
-                }
-            }
-            System.out.print(System.lineSeparator());
-        }
+    public void rightHand() {
+        // maybe call a right hand class to do the heavy lifting in here
+        // then u can call it elsewhere too like in the path verification step
+        logger.info("**** Computing path");
+        logger.info("PATH NOT COMPUTED");
+    }
+
+    public void dispPath() {
+
     }
 
 }
