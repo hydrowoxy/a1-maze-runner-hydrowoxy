@@ -34,25 +34,31 @@ public class RightHand {
             r = toRight(p);
             f = toFwd(p);
             l = toLeft(p);
-            Random random = new Random();
 
             System.out.println("Current position: " + p + ", Direction: " + fwd);
             System.out.println("Right: " + r + ", Forward: " + f + ", Left: " + l);
 
-            // Introduce randomness to decision-making
-            //      The code's preference for either fwd or right caused problems
-            int randomDecision = random.nextInt(2); 
-
-            
-            if (randomDecision == 0 && f != '#') {
+            if (f == ' ') {
                 System.out.println("fwd avail");
                 moveFwd(p);
                 steps.add('F');
-            }else if (r != '#') {
+            } else if (r == ' ') {
                 System.out.println("right avail");
                 turnRight();
                 steps.add('R');
-            } else if (l != '#') {
+            } else if (f == 'X') {
+                System.out.println("fwd avail");
+                moveFwd(p);
+                steps.add('F');
+            } else if (r == 'X') {
+                System.out.println("right avail");
+                turnRight();
+                steps.add('R');
+            } else if (l == ' ') {
+                System.out.println("left avail");
+                turnLeft();
+                steps.add('L');
+            } else if (l == 'X') {
                 System.out.println("left avail");
                 turnLeft();
                 steps.add('L');
@@ -122,6 +128,8 @@ public class RightHand {
     }
 
     private void moveFwd(Point p) {
+        mazeArr[p.y][p.x] = 'X';
+
         if (fwd == 'N')
             p.y--;
         else if (fwd == 'E')
@@ -131,7 +139,6 @@ public class RightHand {
         else
             p.x--;
 
-        mazeArr[p.y][p.x] = 'x';
         printMazeState();
     }
 
