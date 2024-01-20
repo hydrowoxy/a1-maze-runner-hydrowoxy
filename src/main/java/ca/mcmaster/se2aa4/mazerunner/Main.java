@@ -3,6 +3,8 @@ package ca.mcmaster.se2aa4.mazerunner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
+
 import org.apache.commons.cli.*;
 
 public class Main {
@@ -29,14 +31,14 @@ public class Main {
                 // NO LOGS ACTIVATED
                 Maze maze = new Maze();
                 maze.read(inputFile);
-                maze.rightHand();
-                maze.dispPath();
+                
+                RightHand rightHand = new RightHand(maze);
+                List<Character> path = rightHand.pathComp();
+                System.out.println("Path: " + path);
 
                 // PATH VERIFICATION MODE
                 if (cmd.hasOption("p") || cmd.hasOption("path")) {
-                    VerifyPath path = new VerifyPath(maze);
-                    path.verify();
-                    path.disp();
+
                 }
 
                 logger.info("** End of MazeRunner");
