@@ -19,35 +19,37 @@ public class Main {
 
         try {
 
+            logger.info("** Starting Maze Runner");
+
             CommandLine cmd = parser.parse(options, args);
 
-            if (cmd.hasOption("i")) {
-                String inputFile = cmd.getOptionValue("i");
+            String inputFile = cmd.getOptionValue("i");
 
-                logger.info("** Starting Maze Runner");
+            Maze maze = new Maze();
+            maze.read(inputFile);
+
+            if (cmd.hasOption("p")) { 
+
+                // PATH VERIFICATION MODE
+                logger.info("** Path verification mode");
+            
+                String inputPath = cmd.getOptionValue("p");
+
+                Path path = new Path(inputPath, maze);
+                path.verify();
+
+            } else if (cmd.hasOption("i")) {
 
                 // NO LOGS ACTIVATED
-                Maze maze = new Maze();
-                maze.read(inputFile);
+                logger.info("** Path calculation mode");
 
                 RightHand rightHand = new RightHand(maze);
                 rightHand.pathComp();
                 rightHand.canonDisp();
 
-                // PATH VERIFICATION MODE
-                if (cmd.hasOption("p")) {
-                    String inputPath = cmd.getOptionValue("p");
-                    System.out.println("Read this from cmd line:" + inputPath);
-
-                    logger.info("** Path verification mode");
-
-                    Path path = new Path(inputPath, maze);
-                    path.verify();
-                }
-
                 logger.info("** End of MazeRunner");
 
-            }
+            } 
 
         } catch (ParseException e) {
             System.err.println("Error parsing command line options: " + e.getMessage());
