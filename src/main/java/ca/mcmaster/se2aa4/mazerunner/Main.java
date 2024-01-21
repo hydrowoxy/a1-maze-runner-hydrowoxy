@@ -13,7 +13,7 @@ public class Main {
 
         Options options = new Options();
         options.addOption("i", "input", true, "Input maze file");
-        options.addOption("p", "path", false, "Input path (to be verified)");
+        options.addOption("p", "path", true, "Input path (to be verified)");
 
         CommandLineParser parser = new DefaultParser();
 
@@ -21,8 +21,8 @@ public class Main {
 
             CommandLine cmd = parser.parse(options, args);
 
-            if (cmd.hasOption("i") || cmd.hasOption("input")) {
-                String inputFile = cmd.getOptionValue("i", cmd.getOptionValue("input"));
+            if (cmd.hasOption("i")) {
+                String inputFile = cmd.getOptionValue("i");
 
                 logger.info("** Starting Maze Runner");
 
@@ -35,8 +35,14 @@ public class Main {
                 rightHand.canonDisp();
 
                 // PATH VERIFICATION MODE
-                if (cmd.hasOption("p") || cmd.hasOption("path")) {
+                if (cmd.hasOption("p")) {
+                    String inputPath = cmd.getOptionValue("p");
+                    System.out.println("Read this from cmd line:" + inputPath);
 
+                    logger.info("** Path verification mode");
+
+                    Path path = new Path(inputPath, maze);
+                    path.verify();
                 }
 
                 logger.info("** End of MazeRunner");
