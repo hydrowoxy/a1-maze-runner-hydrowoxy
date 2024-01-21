@@ -34,6 +34,7 @@ public class Main {
                 
                 RightHand rightHand = new RightHand(maze);
                 List<Character> path = rightHand.pathComp();
+                
                 System.out.println("Path: " + path);
 
                 // PATH VERIFICATION MODE
