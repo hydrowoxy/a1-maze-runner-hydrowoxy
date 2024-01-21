@@ -17,35 +17,37 @@ public class Maze {
 
     public void read(String inputFile) {
         try {
-
             logger.info("**** Reading the maze from file " + inputFile);
-
+    
             BufferedReader reader = new BufferedReader(new FileReader(inputFile));
             String line;
-            int row = 0;
-
+            int rows = 0;
+            int maxCols = 0;
+    
             while ((line = reader.readLine()) != null) {
-                row++;
+                rows++;
+                maxCols = Math.max(maxCols, line.length());
             }
-
+    
             reader.close();
             reader = new BufferedReader(new FileReader(inputFile));
-
-            mazeArr = new char[row][];
-
+    
+            mazeArr = new char[rows][maxCols];
+    
             int currentRow = 0;
             while ((line = reader.readLine()) != null) {
-                mazeArr[currentRow] = line.toCharArray();
+                char[] rowChars = line.toCharArray();
+                for (int col = 0; col < maxCols; col++) {
+                    mazeArr[currentRow][col] = (col < rowChars.length) ? rowChars[col] : ' ';
+                }
                 currentRow++;
             }
-
+    
             logger.info("**** Constructed the maze " + inputFile);
-
-        } catch(Exception e) {
-
+    
+        } catch (Exception e) {
             logger.error("/!\\ An error has occurred while reading the file /!\\");
             e.printStackTrace();
-
         }
     }
 
