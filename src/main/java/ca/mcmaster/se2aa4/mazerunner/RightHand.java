@@ -2,7 +2,6 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import java.awt.Point;
 
@@ -38,36 +37,31 @@ public class RightHand {
             System.out.println("Current position: " + p + ", Direction: " + fwd);
             System.out.println("Right: " + r + ", Forward: " + f + ", Left: " + l);
 
-            if (f == ' ') {
-                System.out.println("fwd avail");
+
+            if(r == '#'){
+                System.out.println("right is a wall");
+                if (f != '#') {
+                    System.out.println("fwd avail");
+                    moveFwd(p);
+                    steps.add('F');
+                }else if(l != '#'){
+                    System.out.println("left avail");
+                    turnLeft();
+                    steps.add('L');
+                }else{
+                    System.out.println("need to turn back around");
+                    turnRight();
+                    steps.add('R');
+                    turnRight();
+                    steps.add('R');
+                }
+            }else if (r != '#'){
+                System.out.println("right is not a wall, rotate and try again");
+                turnRight();
+                steps.add('R');
+                System.out.println("POST RIGHT FWD");
                 moveFwd(p);
                 steps.add('F');
-            } else if (r == ' ') {
-                System.out.println("right avail");
-                turnRight();
-                steps.add('R');
-            } else if (f == 'X') {
-                System.out.println("fwd avail");
-                moveFwd(p);
-                steps.add('F');
-            } else if (r == 'X') {
-                System.out.println("right avail");
-                turnRight();
-                steps.add('R');
-            } else if (l == ' ') {
-                System.out.println("left avail");
-                turnLeft();
-                steps.add('L');
-            } else if (l == 'X') {
-                System.out.println("left avail");
-                turnLeft();
-                steps.add('L');
-            } else {
-                System.out.println("double turn time");
-                turnRight();
-                steps.add('R');
-                turnRight();
-                steps.add('R');
             }
 
             System.out.println("New position: " + p + ", Direction: " + fwd);
@@ -116,14 +110,14 @@ public class RightHand {
     }
 
     private char toLeft(Point p) {
-        if (fwd == 'N' && p.y - 1 >= 0) {
-            return mazeArr[p.y - 1][p.x];
-        } else if (fwd == 'E' && p.x + 1 < mazeArr[0].length) {
-            return mazeArr[p.y][p.x + 1];
-        } else if (fwd == 'S' && p.y + 1 < mazeArr.length) {
-            return mazeArr[p.y + 1][p.x];
+        if (fwd == 'N') {
+            return mazeArr[p.y][p.x-1];
+        } else if (fwd == 'E') {
+            return mazeArr[p.y-1][p.x];
+        } else if (fwd == 'S') {
+            return mazeArr[p.y][p.x+1];
         } else {
-            return mazeArr[p.y][p.x - 1];
+            return mazeArr[p.y+1][p.x];
         }
     }
 
@@ -157,3 +151,4 @@ public class RightHand {
     }
 
 }
+
