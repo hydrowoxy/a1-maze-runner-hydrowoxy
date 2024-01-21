@@ -28,28 +28,21 @@ public class RightHand {
 
         while (p.x != endCol) {
             if(toRight(p) == '#'){
-                System.out.println("Right is a wall");
                 if (toFwd(p) != '#') {
-                    System.out.println("GO FORWARD");
                     moveFwd(p);
                     steps.add('F');
                 }else if(toLeft(p) != '#'){
-                    System.out.println("LEFT");
                     turnLeft();
                     steps.add('L');
                 }else{
-                    System.out.println("TURN AROUND");
                     turnRight();
                     steps.add('R');
                     turnRight();
                     steps.add('R');
                 }
             }else if (toRight(p) != '#'){
-                System.out.println("Right isnt a wall");
-                System.out.println("TURN RIGHT");
                 turnRight();
                 steps.add('R');
-                System.out.println("GO FORWARD");
                 moveFwd(p);
                 steps.add('F');
             }
@@ -59,7 +52,6 @@ public class RightHand {
     }
 
     public List<Character> pathComp() {
-        System.out.println("START: " + start);
         return rightHand(start);
     }
 
@@ -87,19 +79,14 @@ public class RightHand {
     }
 
     private char toFwd(Point p) {
-        System.out.println("fgoing fwd");
         switch (fwd) {
             case 'N':
-                System.out.println("facing n");
                 return mazeArr[p.y - 1][p.x];
             case 'E':
-                System.out.println("facing E");
                 return mazeArr[p.y][p.x + 1];
             case 'S':
-                System.out.println("facing S");
                 return mazeArr[p.y + 1][p.x];
             default:
-                System.out.println("idk west");
                 return mazeArr[p.y][p.x - 1];
         }
     }
@@ -118,7 +105,6 @@ public class RightHand {
     }
 
     private void moveFwd(Point p) {
-        mazeArr[p.y][p.x] = 'X';
 
         switch (fwd) {
             case 'N':
@@ -135,20 +121,6 @@ public class RightHand {
                 break;
         }
 
-        printMazeState();
-        System.out.println(p);
-    }
-
-    
-    private void printMazeState() {
-        for (int i = 0; i < mazeArr.length; i++) {
-            for (int j = 0; j < mazeArr[0].length; j++) {
-                System.out.print(mazeArr[i][j] + " ");
-            }
-            System.out.println();
-        }
-        System.out.println("Facing direction: " + fwd);
-        System.out.println();
     }
 
     public void canonDisp() {
