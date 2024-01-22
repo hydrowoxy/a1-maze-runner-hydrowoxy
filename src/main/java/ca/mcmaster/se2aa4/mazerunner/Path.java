@@ -13,11 +13,11 @@ public class Path {
     private int dirIdx = 1;
     private char fwd = dir[dirIdx];
     
-    public Path(String inputPath, Maze maze){
-        this.inputPath = inputPath;
+    public Path(String inputPath, Maze maze){ //in future inherit all from traversal but also has inputpath, and takes in inputpath too
         this.mazeArr = maze.getMazeArr();
         this.start = maze.getStartPoint();
         this.endCol = maze.getEndCol();
+        this.inputPath = inputPath;
     }
 
     public void runPath(Point p, String pathStr) {
