@@ -40,19 +40,21 @@ public class Main {
 
             } else if (cmd.hasOption("i")) {
 
-                // NO LOGS ACTIVATED
+                // PATH CALCULATION MODE
                 logger.info("** Path calculation mode");
 
                 RightHand rightHand = new RightHand(maze);
                 rightHand.pathComp();
                 rightHand.canonDisp();
 
-                logger.info("** End of MazeRunner");
-
             } 
 
+            logger.info("** End of MazeRunner");
+
         } catch (ParseException e) {
-            System.err.println("Error parsing command line options: " + e.getMessage());
+
+            logger.error("Error parsing command line options: " + e.getMessage());
+            
         }
 
     }
