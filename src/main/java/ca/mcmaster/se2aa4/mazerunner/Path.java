@@ -11,8 +11,8 @@ public class Path extends Traversal {
         this.inputPath = inputPath;
     }
 
-    public void runPath(Point p, String pathStr) {
-        pathStr = pathStr.replaceAll("\\s", "");
+    private void runPath(Point p, String pathStr) {
+        pathStr = clean(pathStr);
 
         for (char instruction : pathStr.toCharArray()) {
             switch (instruction) {
@@ -39,8 +39,29 @@ public class Path extends Traversal {
         }
     }
 
-    public void unFactor(){
+    private String clean(String pathStr) {
+        pathStr = pathStr.replaceAll("\\s", "");
+        if (pathStr == null || pathStr.isEmpty() || !pathStr.matches(".*\\d.*")) {return pathStr;}
+    
+        StringBuilder result = new StringBuilder();
+        StringBuilder countStr = new StringBuilder();
+    
+        for (char c : pathStr.toCharArray()) {
+            if (Character.isDigit(c)) {countStr.append(c);} 
+            
+            else {
 
+                if (countStr.length() > 0) {
+
+                    int count = Integer.parseInt(countStr.toString());
+                    for (int i = 0; i < count; i++) {result.append(c);}
+                    countStr.setLength(0); 
+
+                } else {result.append(c);}
+
+            }
+        }
+        return result.toString();
     }
     
     public void verify(){
@@ -48,6 +69,3 @@ public class Path extends Traversal {
     }
 
 }
-
-// could have a path class w unfactor, verify, verify implemented in path and unfactor implemented in path
-// child class inherits from path and runs it but like...idk like it will always run it the same way so no point

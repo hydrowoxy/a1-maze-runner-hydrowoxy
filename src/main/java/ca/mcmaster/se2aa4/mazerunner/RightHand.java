@@ -11,8 +11,8 @@ public class RightHand extends Algorithm {
     }
 
     @Override
-    public List<Character> algorithm(Point p) {
-
+    protected List<Character> algorithm(Point p) {
+        
         while (p.x != endCol) {
             if(toRight(p) == '#'){
                 if (toFwd(p) != '#') {

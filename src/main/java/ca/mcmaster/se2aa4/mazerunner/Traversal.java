@@ -1,7 +1,6 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
 import java.awt.Point;
-import java.util.List; 
 
 public abstract class Traversal {
     protected char[][] mazeArr;
@@ -18,17 +17,17 @@ public abstract class Traversal {
         this.endCol = maze.getEndCol();
     }
 
-    public void turnRight() {
+    protected void turnRight() {
         dirIdx = (dirIdx + 1) % 4;
         fwd = dir[dirIdx];
     }
 
-    public void turnLeft() {
+    protected void turnLeft() {
         dirIdx = (dirIdx + 3) % 4;
         fwd = dir[dirIdx];
     }
 
-    public char toRight(Point p) {
+    protected char toRight(Point p) {
         switch (fwd) {
             case 'N':
                 return mazeArr[p.y][p.x + 1];
@@ -41,7 +40,7 @@ public abstract class Traversal {
         }
     }
 
-    public char toFwd(Point p) {
+    protected char toFwd(Point p) {
         switch (fwd) {
             case 'N':
                 return mazeArr[p.y - 1][p.x];
@@ -54,7 +53,7 @@ public abstract class Traversal {
         }
     }
 
-    public char toLeft(Point p) {
+    protected char toLeft(Point p) {
         switch (fwd) {
             case 'N':
                 return mazeArr[p.y][p.x - 1];
@@ -67,8 +66,7 @@ public abstract class Traversal {
         }
     }
 
-    public void moveFwd(Point p) {
-
+    protected void moveFwd(Point p) {
         switch (fwd) {
             case 'N':
                 p.y--;

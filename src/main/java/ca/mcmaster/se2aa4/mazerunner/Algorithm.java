@@ -45,7 +45,7 @@ public abstract class Algorithm extends Traversal {
         System.out.println(result.toString());
     }
 
-    public abstract List<Character> algorithm(Point p);
+    protected abstract List<Character> algorithm(Point p);
     
     public List<Character> pathComp() {
         return algorithm(start);
