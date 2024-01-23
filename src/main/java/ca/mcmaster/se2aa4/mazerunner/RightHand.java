@@ -10,7 +10,8 @@ public class RightHand extends Algorithm {
         super(maze);
     }
 
-    private List<Character> rightHand(Point p) {
+    @Override
+    public List<Character> algorithm(Point p) {
 
         while (p.x != endCol) {
             if(toRight(p) == '#'){
@@ -35,10 +36,6 @@ public class RightHand extends Algorithm {
         }
 
         return steps;
-    }
-
-    public List<Character> pathComp() {
-        return rightHand(start);
     }
     
 }

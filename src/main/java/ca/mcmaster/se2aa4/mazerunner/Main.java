@@ -46,6 +46,7 @@ public class Main {
                 RightHand rightHand = new RightHand(maze);
                 rightHand.pathComp();
                 rightHand.canonDisp();
+                rightHand.factorDisp();
 
             } 
 

@@ -13,6 +13,7 @@ public class Path extends Traversal {
 
     public void runPath(Point p, String pathStr) {
         pathStr = pathStr.replaceAll("\\s", "");
+
         for (char instruction : pathStr.toCharArray()) {
             switch (instruction) {
                 case 'R':
@@ -37,9 +38,16 @@ public class Path extends Traversal {
             System.out.println("incorrect path");
         }
     }
+
+    public void unFactor(){
+
+    }
     
     public void verify(){
         runPath(start, inputPath);
     }
 
 }
+
+// could have a path class w unfactor, verify, verify implemented in path and unfactor implemented in path
+// child class inherits from path and runs it but like...idk like it will always run it the same way so no point
