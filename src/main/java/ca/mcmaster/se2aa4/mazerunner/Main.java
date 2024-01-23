@@ -52,9 +52,7 @@ public class Main {
             logger.info("** End of MazeRunner");
 
         } catch (ParseException e) {
-
             logger.error("Error parsing command line options: " + e.getMessage());
-            
         }
 
     }

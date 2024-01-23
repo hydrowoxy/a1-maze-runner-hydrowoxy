@@ -1,6 +1,6 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-import java.awt.Point; // don't forget maybe u need to add this as a dependency 
+import java.awt.Point; 
 
 public abstract class Traversal {
     protected char[][] mazeArr;
