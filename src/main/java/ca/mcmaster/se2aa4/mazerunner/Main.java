@@ -14,6 +14,7 @@ public class Main {
         Options options = new Options();
         options.addOption("i", "input", true, "Input maze file");
         options.addOption("p", "path", true, "Input path (to be verified)");
+        options.addOption("m", "method", true, "Path calculation  method");
 
         CommandLineParser parser = new DefaultParser();
 
@@ -26,6 +27,8 @@ public class Main {
             String inputFile = cmd.getOptionValue("i");
 
             Maze maze = new Maze();
+            Algorithm algorithm;
+
             maze.read(inputFile);
 
             if (cmd.hasOption("p")) { 
@@ -43,9 +46,21 @@ public class Main {
                 // PATH CALCULATION MODE
                 logger.info("** Path calculation mode");
 
-                RightHand rightHand = new RightHand(maze);
-                rightHand.pathComp();
-                rightHand.factorDisp();
+                if (cmd.hasOption("m")) {
+
+                    // User-selected algorithm
+                    String algorithmName = cmd.getOptionValue("m");
+                    algorithm = AlgorithmRegistry.getAlgorithm(algorithmName, maze);
+
+                } else { 
+
+                    // Default to right-hand algorithm
+                    algorithm = new RightHand(maze);
+
+                }
+
+                algorithm.pathComp();
+                algorithm.factorDisp();
                 
             } 
 

@@ -69,3 +69,7 @@ public class Path extends Traversal {
     }
 
 }
+
+// currently reads AND verifies
+// could split it up
+// also need to add input checking
