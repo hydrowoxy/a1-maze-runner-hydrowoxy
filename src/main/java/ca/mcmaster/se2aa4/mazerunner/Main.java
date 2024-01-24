@@ -3,6 +3,8 @@ package ca.mcmaster.se2aa4.mazerunner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
+
 import org.apache.commons.cli.*;
 
 public class Main {
@@ -14,7 +16,7 @@ public class Main {
         Options options = new Options();
         options.addOption("i", "input", true, "Input maze file");
         options.addOption("p", "path", true, "Input path (to be verified)");
-        options.addOption("m", "method", true, "Path calculation  method");
+        options.addOption("m", "method", true, "Path calculation method");
 
         CommandLineParser parser = new DefaultParser();
 
@@ -30,38 +32,38 @@ public class Main {
 
             Algorithm algorithm;
 
-            if (cmd.hasOption("p")||cmd.hasOption("path")) { 
+            if (cmd.hasOption("p") || cmd.hasOption("path")) {
 
                 // PATH VERIFICATION MODE
                 logger.info("** Path verification mode");
-            
+
                 String inputPath = cmd.getOptionValue("p");
 
                 Path path = new Path(inputPath, maze);
                 path.verify();
 
-            } else if (cmd.hasOption("i")||cmd.hasOption("input")) {
+            } else if (cmd.hasOption("i") || cmd.hasOption("input")) {
 
                 // PATH CALCULATION MODE
                 logger.info("** Path calculation mode");
 
-                if (cmd.hasOption("m")||cmd.hasOption("method")) {
+                if (cmd.hasOption("m") || cmd.hasOption("method")) {
 
                     // User-selected algorithm
                     String algorithmName = cmd.getOptionValue("m");
                     algorithm = AlgorithmRegistry.getAlgorithm(algorithmName, maze);
 
-                } else { 
+                } else {
 
                     // Default to right-hand algorithm
                     algorithm = new RightHand(maze);
 
                 }
 
-                algorithm.pathComp();
-                algorithm.factorDisp();
-                
-            } 
+                List<Character> result = algorithm.pathComp();
+                Display.factorDisp(result);
+
+            }
 
             logger.info("** End of MazeRunner");
 
@@ -71,4 +73,3 @@ public class Main {
 
     }
 }
-

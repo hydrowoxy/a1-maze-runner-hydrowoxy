@@ -1,7 +1,6 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
 import java.util.List;
-
 import java.awt.Point;
 
 public class RightHand extends Algorithm {
@@ -36,6 +35,7 @@ public class RightHand extends Algorithm {
         }
 
         return steps;
+        
     }
     
 }
