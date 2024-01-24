@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class AlgorithmRegistry {
+    
     private static final Map<String, Class<? extends Algorithm>> ALGORITHMS = new HashMap<>();
     private static final Logger logger = LogManager.getLogger(AlgorithmRegistry.class);
 
@@ -28,4 +29,5 @@ public class AlgorithmRegistry {
         logger.error("Invalid algorithm: " + algorithmName + ". Defaulting to RightHand.");
         return new RightHand(maze);
     }
+    
 }

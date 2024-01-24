@@ -2,9 +2,13 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 import java.awt.Point;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Path extends Traversal {
 
     private String inputPath;
+    private static final Logger logger = LogManager.getLogger(Path.class);
 
     public Path(String inputPath, Maze maze){ 
         super(maze);
@@ -12,30 +16,35 @@ public class Path extends Traversal {
     }
 
     private void runPath(Point p, String pathStr) {
-        pathStr = clean(pathStr);
 
-        for (char instruction : pathStr.toCharArray()) {
-            switch (instruction) {
-                case 'R':
-                        turnRight();
-                        break;
-                case 'F':
-                    if(toFwd(p) != '#'){
-                        moveFwd(p);
-                        break;
-                    }else{break;}
-                case 'L':
-                        turnLeft();
-                        break;
-                default:
-                    break;
-            }
-        }
-    
-        if (p.x == endCol) {
-            System.out.println("correct path");
+        if(!isValid(pathStr)) { 
+            logger.error("Invalid path input."); 
         } else {
-            System.out.println("incorrect path");
+            pathStr = clean(pathStr);
+
+            for (char instruction : pathStr.toCharArray()) {
+                switch (instruction) {
+                    case 'R':
+                            turnRight();
+                            break;
+                    case 'F':
+                        if(toFwd(p) != '#'){
+                            moveFwd(p);
+                            break;
+                        }else{break;}
+                    case 'L':
+                            turnLeft();
+                            break;
+                    default:
+                        break;
+                }
+            }
+        
+            if (p.x == endCol) {
+                System.out.println("correct path");
+            } else {
+                System.out.println("incorrect path");
+            }
         }
     }
 
@@ -68,8 +77,8 @@ public class Path extends Traversal {
         runPath(start, inputPath);
     }
 
-}
+    private boolean isValid(String pathStr){
+        return pathStr.matches("^[FfLlRr\\d\\s]+$") && !Character.isDigit(pathStr.charAt(pathStr.length() - 1));
+    }
 
-// currently reads AND verifies
-// could split it up
-// also need to add input checking
+}

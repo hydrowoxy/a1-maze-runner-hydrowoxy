@@ -22,16 +22,15 @@ public class Main {
 
             logger.info("** Starting Maze Runner");
 
-            CommandLine cmd = parser.parse(options, args);
+            CommandLine cmd = parser.parse(options, args, true);
 
             String inputFile = cmd.getOptionValue("i");
-
             Maze maze = new Maze();
-            Algorithm algorithm;
-
             maze.read(inputFile);
 
-            if (cmd.hasOption("p")) { 
+            Algorithm algorithm;
+
+            if (cmd.hasOption("p")||cmd.hasOption("path")) { 
 
                 // PATH VERIFICATION MODE
                 logger.info("** Path verification mode");
@@ -41,12 +40,12 @@ public class Main {
                 Path path = new Path(inputPath, maze);
                 path.verify();
 
-            } else if (cmd.hasOption("i")) {
+            } else if (cmd.hasOption("i")||cmd.hasOption("input")) {
 
                 // PATH CALCULATION MODE
                 logger.info("** Path calculation mode");
 
-                if (cmd.hasOption("m")) {
+                if (cmd.hasOption("m")||cmd.hasOption("method")) {
 
                     // User-selected algorithm
                     String algorithmName = cmd.getOptionValue("m");

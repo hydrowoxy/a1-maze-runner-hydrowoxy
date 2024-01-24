@@ -17,34 +17,37 @@ public class Maze {
 
     public void read(String inputFile) {
         try {
-            logger.info("**** Reading the maze from file " + inputFile);
-    
-            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
-            String line;
-            int rows = 0;
-            int maxCols = 0;
-    
-            while ((line = reader.readLine()) != null) {
-                rows++;
-                maxCols = Math.max(maxCols, line.length());
-            }
-    
-            reader.close();
-            reader = new BufferedReader(new FileReader(inputFile));
-    
-            mazeArr = new char[rows][maxCols];
-    
-            int currentRow = 0;
-            while ((line = reader.readLine()) != null) {
-                char[] rowChars = line.toCharArray();
-                for (int col = 0; col < maxCols; col++) {
-                    mazeArr[currentRow][col] = (col < rowChars.length) ? rowChars[col] : ' ';
+            if(!isValid(inputFile)){
+                logger.error("Invalid maze input.");
+            } else {
+                logger.info("**** Reading the maze from file " + inputFile);
+        
+                BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+                String line;
+                int rows = 0;
+                int maxCols = 0;
+        
+                while ((line = reader.readLine()) != null) {
+                    rows++;
+                    maxCols = Math.max(maxCols, line.length());
                 }
-                currentRow++;
+        
+                reader.close();
+                reader = new BufferedReader(new FileReader(inputFile));
+        
+                mazeArr = new char[rows][maxCols];
+        
+                int currentRow = 0;
+                while ((line = reader.readLine()) != null) {
+                    char[] rowChars = line.toCharArray();
+                    for (int col = 0; col < maxCols; col++) {
+                        mazeArr[currentRow][col] = (col < rowChars.length) ? rowChars[col] : ' ';
+                    }
+                    currentRow++;
+                }
+        
+                logger.info("**** Constructed the maze " + inputFile);
             }
-    
-            logger.info("**** Constructed the maze " + inputFile);
-    
         } catch (Exception e) {
             logger.error("/!\\ An error has occurred while reading the file /!\\");
             e.printStackTrace();
@@ -69,6 +72,10 @@ public class Maze {
             return -1;
         }
         return mazeArr[0].length - 1;
+    }
+
+    private boolean isValid(String inputFile){
+        return inputFile != null && inputFile.toLowerCase().endsWith(".txt");
     }
 
 }
