@@ -6,13 +6,18 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/*
+ * Link I used to learn about HashMap: https://www.w3schools.com/java/java_hashmap.asp
+ */
+
 public class AlgorithmRegistry {
 
     private static final Map<String, Class<? extends Algorithm>> ALGORITHMS = new HashMap<>();
     private static final Logger logger = LogManager.getLogger(AlgorithmRegistry.class);
 
     static {
-        ALGORITHMS.put("righthand", RightHand.class);
+        ALGORITHMS.put("righthand", RightHand.class);  
+        ALGORITHMS.put("tremaux", Tremaux.class);
     }
 
     public static Algorithm getAlgorithm(String algorithmName, Maze maze) {

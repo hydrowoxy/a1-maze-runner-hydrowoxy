@@ -21,7 +21,6 @@ public abstract class Traversal {
 
     protected void turnRight() {
         fwd = Directions.values()[(fwd.ordinal() + 1) % 4];
-
     }
 
     protected void turnLeft() {
@@ -65,6 +64,19 @@ public abstract class Traversal {
                 return mazeArr[p.y][p.x + 1];
             default:
                 return mazeArr[p.y + 1][p.x];
+        }
+    }
+
+    protected char toBehind(Point p) {
+        switch (fwd) {
+            case NORTH:
+                return mazeArr[p.y + 1][p.x];
+            case EAST:
+                return mazeArr[p.y][p.x - 1];
+            case SOUTH:
+                return mazeArr[p.y - 1][p.x];
+            default:
+                return mazeArr[p.y][p.x + 1];
         }
     }
 
