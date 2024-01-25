@@ -3,10 +3,13 @@ package ca.mcmaster.se2aa4.mazerunner;
 import java.util.List;
 import java.awt.Point;
 
+import java.util.ArrayList;
+
 public class RightHand extends Algorithm {
 
     public RightHand(Maze maze) {
         super(maze);
+        this.steps = new ArrayList<>();
     }
 
     @Override
@@ -35,7 +38,7 @@ public class RightHand extends Algorithm {
         }
 
         return steps;
-        
+
     }
     
 }

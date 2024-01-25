@@ -7,9 +7,11 @@ public abstract class Traversal {
     protected Point start;
     protected int endCol;
 
-    protected char[] dir = { 'N', 'E', 'S', 'W' };
-    protected int dirIdx = 1;
-    protected char fwd = dir[dirIdx];
+    protected enum Directions{
+        NORTH, EAST, SOUTH, WEST
+    }
+
+    protected Directions fwd = Directions.EAST;
 
     public Traversal(Maze maze){
         this.mazeArr = maze.getMazeArr();
@@ -18,22 +20,22 @@ public abstract class Traversal {
     }
 
     protected void turnRight() {
-        dirIdx = (dirIdx + 1) % 4;
-        fwd = dir[dirIdx];
+        fwd = Directions.values()[(fwd.ordinal() + 1) % 4];
+
     }
 
     protected void turnLeft() {
-        dirIdx = (dirIdx + 3) % 4;
-        fwd = dir[dirIdx];
+        fwd = Directions.values()[(fwd.ordinal() + 3) % 4];
+
     }
 
     protected char toRight(Point p) {
         switch (fwd) {
-            case 'N':
+            case NORTH:
                 return mazeArr[p.y][p.x + 1];
-            case 'E':
+            case EAST:
                 return mazeArr[p.y + 1][p.x];
-            case 'S':
+            case SOUTH:
                 return mazeArr[p.y][p.x - 1];
             default:
                 return mazeArr[p.y - 1][p.x];
@@ -42,11 +44,11 @@ public abstract class Traversal {
 
     protected char toFwd(Point p) {
         switch (fwd) {
-            case 'N':
+            case NORTH:
                 return mazeArr[p.y - 1][p.x];
-            case 'E':
+            case EAST:
                 return mazeArr[p.y][p.x + 1];
-            case 'S':
+            case SOUTH:
                 return mazeArr[p.y + 1][p.x];
             default:
                 return mazeArr[p.y][p.x - 1];
@@ -55,11 +57,11 @@ public abstract class Traversal {
 
     protected char toLeft(Point p) {
         switch (fwd) {
-            case 'N':
+            case NORTH:
                 return mazeArr[p.y][p.x - 1];
-            case 'E':
+            case EAST:
                 return mazeArr[p.y - 1][p.x];
-            case 'S':
+            case SOUTH:
                 return mazeArr[p.y][p.x + 1];
             default:
                 return mazeArr[p.y + 1][p.x];
@@ -68,13 +70,13 @@ public abstract class Traversal {
 
     protected void moveFwd(Point p) {
         switch (fwd) {
-            case 'N':
+            case NORTH:
                 p.y--;
                 break;
-            case 'E':
+            case EAST:
                 p.x++;
                 break;
-            case 'S':
+            case SOUTH:
                 p.y++;
                 break;
             default:

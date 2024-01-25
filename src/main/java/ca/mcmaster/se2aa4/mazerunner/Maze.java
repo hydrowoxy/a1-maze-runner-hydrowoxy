@@ -45,8 +45,6 @@ public class Maze {
                     }
                     currentRow++;
                 }
-        
-                logger.info("**** Constructed the maze " + inputFile);
             }
         } catch (Exception e) {
             logger.error("/!\\ An error has occurred while reading the file /!\\");
@@ -73,6 +71,7 @@ public class Maze {
         }
         return mazeArr[0].length - 1;
     }
+
 
     private boolean isValid(String inputFile){
         return inputFile != null && inputFile.toLowerCase().endsWith(".txt");
