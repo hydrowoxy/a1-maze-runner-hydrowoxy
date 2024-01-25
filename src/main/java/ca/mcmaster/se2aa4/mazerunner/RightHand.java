@@ -1,8 +1,6 @@
 package ca.mcmaster.se2aa4.mazerunner;
-
 import java.util.List;
 import java.awt.Point;
-
 import java.util.ArrayList;
 
 public class RightHand extends Algorithm {
@@ -14,26 +12,26 @@ public class RightHand extends Algorithm {
 
     @Override
     protected List<Character> algorithm(Point p) {
-        
+
         while (p.x != endCol) {
             if(toRight(p) == '#'){
                 if (toFwd(p) != '#') {
                     moveFwd(p);
-                    steps.add('F');
+                    steps.add(FORWARD);
                 }else if(toLeft(p) != '#'){
                     turnLeft();
-                    steps.add('L');
+                    steps.add(LEFT);
                 }else{
                     turnRight();
-                    steps.add('R');
+                    steps.add(RIGHT);
                     turnRight();
-                    steps.add('R');
+                    steps.add(RIGHT);
                 }
             }else if (toRight(p) != '#'){
                 turnRight();
-                steps.add('R');
+                steps.add(RIGHT);
                 moveFwd(p);
-                steps.add('F');
+                steps.add(FORWARD);
             }
         }
 

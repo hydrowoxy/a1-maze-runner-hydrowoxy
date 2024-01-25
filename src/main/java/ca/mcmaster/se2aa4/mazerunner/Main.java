@@ -39,7 +39,7 @@ public class Main {
 
                 String inputPath = cmd.getOptionValue("p");
 
-                Path path = new Path(inputPath, maze);
+                VerifyPath path = new VerifyPath(inputPath, maze);
                 path.verify();
 
             } else if (cmd.hasOption("i") || cmd.hasOption("input")) {

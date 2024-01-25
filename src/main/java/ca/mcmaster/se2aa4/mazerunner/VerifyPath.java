@@ -5,16 +5,26 @@ import java.awt.Point;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class Path extends Traversal {
+public class VerifyPath extends Traversal {
 
     private String inputPath;
-    private static final Logger logger = LogManager.getLogger(Path.class);
+    private static final Logger logger = LogManager.getLogger(VerifyPath.class);
 
-    public Path(String inputPath, Maze maze){ 
+     /**
+     * Constructor
+     * @param inputPath The string representation of the path to be executed.
+     * @param maze The maze on which the path is to be executed.
+     */
+    public VerifyPath(String inputPath, Maze maze){ 
         super(maze);
         this.inputPath = inputPath;
     }
 
+     /**
+     * Executes the specified path in the maze starting from the given point.
+     * @param p The starting point for the traversal.
+     * @param pathStr The string representation of the path to be executed.
+     */
     private void runPath(Point p, String pathStr) {
 
         if(!isValid(pathStr)) { 
@@ -28,7 +38,7 @@ public class Path extends Traversal {
                             turnRight();
                             break;
                     case 'F':
-                        if(toFwd(p) != '#'){
+                        if(toFwd(p) != '#'){ // only move forward if you aren't going into a wall
                             moveFwd(p);
                             break;
                         }else{break;}
@@ -48,6 +58,11 @@ public class Path extends Traversal {
         }
     }
 
+     /**
+     * Cleans the input path by removing whitespace and un-factorizing it.
+     * @param pathStr The string representation of the path to be cleaned.
+     * @return The clean path string, in canonical form. 
+     */
     private String clean(String pathStr) {
         pathStr = pathStr.replaceAll("\\s", "");
         if (pathStr == null || pathStr.isEmpty() || !pathStr.matches(".*\\d.*")) {return pathStr;}
@@ -73,10 +88,20 @@ public class Path extends Traversal {
         return result.toString();
     }
     
+     /**
+     * Verifies the validity of the input path by executing it in the maze.
+     */
     public void verify(){
         runPath(start, inputPath);
     }
 
+     /**
+     * Checks if the input path string is valid.
+     * i.e., it contains only F,R,L characters (upper or lowercase), digits, and spaces, 
+     * and does not end on a number.
+     * @param pathStr The string representation of the path to be validated.
+     * @return True if the path is valid; false otherwise.
+     */
     private boolean isValid(String pathStr){
         return pathStr.matches("^[FfLlRr\\d\\s]+$") && !Character.isDigit(pathStr.charAt(pathStr.length() - 1));
     }

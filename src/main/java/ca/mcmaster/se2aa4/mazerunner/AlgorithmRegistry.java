@@ -1,14 +1,13 @@
-package ca.mcmaster.se2aa4.mazerunner;
+/*
+ * Link I used to learn about HashMap: https://www.w3schools.com/java/java_hashmap.asp
+ */
 
+package ca.mcmaster.se2aa4.mazerunner;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-/*
- * Link I used to learn about HashMap: https://www.w3schools.com/java/java_hashmap.asp
- */
 
 public class AlgorithmRegistry {
 

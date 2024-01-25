@@ -1,5 +1,4 @@
 package ca.mcmaster.se2aa4.mazerunner;
-
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +8,7 @@ public class Tremaux extends Algorithm {
 
     public Tremaux(Maze maze) {
         super(maze);
-        this.steps = new ArrayList<>();
+        this.steps = new ArrayList<>(); 
     }
 
     @Override
@@ -112,23 +111,13 @@ public class Tremaux extends Algorithm {
     }
 
     private boolean atJunction(Point p) {
-        if (p.x == 0) {
-            return false;
-        }
+        if (p.x == 0) { return false; }
 
         int countPaths = 0;
-        if (toFwd(p) != '#') {
-            countPaths++;
-        }
-        if (toRight(p) != '#') {
-            countPaths++;
-        }
-        if (toBehind(p) != '#' && toFwd(p) == '#') {
-            countPaths++;
-        }
-        if (toLeft(p) != '#') {
-            countPaths++;
-        }
+        if (toFwd(p) != '#') { countPaths++; }
+        if (toRight(p) != '#') { countPaths++; }
+        if (toBehind(p) != '#' && toFwd(p) == '#') { countPaths++; }
+        if (toLeft(p) != '#') { countPaths++; }
 
         return countPaths > 1;
     }
@@ -138,27 +127,27 @@ public class Tremaux extends Algorithm {
         while (p.x != endCol) {
             if(toFwd(p) == 'O'){
                 moveFwd(p);
-                steps.add('F');
+                steps.add(FORWARD);
             }else if (toRight(p) == 'O'){
                 turnRight();
-                steps.add('R');
+                steps.add(RIGHT);
             }else if (toLeft(p) == 'O'){
                 turnLeft();
-                steps.add('L');
+                steps.add(LEFT);
             }else if(toFwd(p) == ' '){
                 moveFwd(p);
-                steps.add('F');
+                steps.add(FORWARD);
             }else if(toRight(p) == ' '){
                 turnRight();
-                steps.add('R');
+                steps.add(RIGHT);
             }else if(toLeft(p) == ' '){
                 turnLeft();
-                steps.add('L');
+                steps.add(LEFT);
             }else{ 
                 turnRight();
-                steps.add('R');
+                steps.add(RIGHT);
                 turnRight();
-                steps.add('R');
+                steps.add(RIGHT);
             }
         }
 
