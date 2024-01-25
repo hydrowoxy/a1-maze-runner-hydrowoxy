@@ -10,11 +10,6 @@ public class VerifyPath extends Traversal {
     private String inputPath;
     private static final Logger logger = LogManager.getLogger(VerifyPath.class);
 
-     /**
-     * Constructor
-     * @param inputPath The string representation of the path to be executed.
-     * @param maze The maze on which the path is to be executed.
-     */
     public VerifyPath(String inputPath, Maze maze){ 
         super(maze);
         this.inputPath = inputPath;
@@ -22,6 +17,7 @@ public class VerifyPath extends Traversal {
 
      /**
      * Executes the specified path in the maze starting from the given point.
+     * 
      * @param p The starting point for the traversal.
      * @param pathStr The string representation of the path to be executed.
      */
@@ -32,13 +28,15 @@ public class VerifyPath extends Traversal {
         } else {
             pathStr = clean(pathStr);
 
+            // Step through the given path
             for (char instruction : pathStr.toCharArray()) {
                 switch (instruction) {
                     case 'R':
                             turnRight();
                             break;
                     case 'F':
-                        if(toFwd(p) != '#'){ // only move forward if you aren't going into a wall
+                        // Only move forward if you aren't going into a wall
+                        if(toFwd(p) != '#'){ 
                             moveFwd(p);
                             break;
                         }else{break;}
@@ -60,6 +58,7 @@ public class VerifyPath extends Traversal {
 
      /**
      * Cleans the input path by removing whitespace and un-factorizing it.
+     * 
      * @param pathStr The string representation of the path to be cleaned.
      * @return The clean path string, in canonical form. 
      */
@@ -99,6 +98,7 @@ public class VerifyPath extends Traversal {
      * Checks if the input path string is valid.
      * i.e., it contains only F,R,L characters (upper or lowercase), digits, and spaces, 
      * and does not end on a number.
+     * 
      * @param pathStr The string representation of the path to be validated.
      * @return True if the path is valid; false otherwise.
      */

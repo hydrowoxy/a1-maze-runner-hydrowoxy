@@ -15,13 +15,18 @@ public class Maze {
 
     public Maze(){} 
 
+     /**
+     * Reads the maze from the specified input file.
+     * 
+     * @param inputFile The path to the file containing the maze structure.
+     */
     public void read(String inputFile) {
         try {
             if(!isValid(inputFile)){
                 logger.error("Invalid maze input.");
             } else {
                 logger.info("**** Reading the maze from file " + inputFile);
-        
+
                 BufferedReader reader = new BufferedReader(new FileReader(inputFile));
                 String line;
                 int rows = 0;
@@ -56,6 +61,11 @@ public class Maze {
         return mazeArr;
     }
 
+     /**
+     * Finds and returns the starting point of the maze.
+     * 
+     * @return The starting point as a Point object.
+     */
     public Point getStartPoint() {
         for (int row = 0; row < mazeArr.length; row++) {
             if (mazeArr[row][0] == ' ') {
@@ -65,14 +75,23 @@ public class Maze {
         return null;
     }
 
+     /**
+     * Retrieves the column index of the last column in the maze.
+     * 
+     * @return The column index of the last column in the maze.
+     */
     public int getEndCol() {
         if (mazeArr == null || mazeArr.length == 0 || mazeArr[0].length == 0) {
             return -1;
         }
         return mazeArr[0].length - 1;
     }
-
-
+    /**
+     * Checks if the input file is a .txt file.
+     * 
+     * @param inputFile The path to the file to be checked.
+     * @return true if the file is a valid text file; otherwise, false.
+     */
     private boolean isValid(String inputFile){
         return inputFile != null && inputFile.toLowerCase().endsWith(".txt");
     }

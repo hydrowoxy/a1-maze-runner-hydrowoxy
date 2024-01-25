@@ -5,14 +5,12 @@ import java.awt.Point;
 public abstract class Algorithm extends Traversal {
 
     protected List<Character> steps;
-    
+
     protected static final char FORWARD = 'F';
     protected static final char RIGHT = 'R';
     protected static final char LEFT = 'L';
 
-    public Algorithm(Maze maze){
-        super(maze);
-    }
+    public Algorithm(Maze maze) { super(maze); }
 
     protected abstract List<Character> algorithm(Point p);
 

@@ -32,9 +32,9 @@ public class Main {
 
             Algorithm algorithm;
 
+            // PATH VERIFICATION MODE
             if (cmd.hasOption("p") || cmd.hasOption("path")) {
 
-                // PATH VERIFICATION MODE
                 logger.info("** Path verification mode");
 
                 String inputPath = cmd.getOptionValue("p");
@@ -42,23 +42,19 @@ public class Main {
                 VerifyPath path = new VerifyPath(inputPath, maze);
                 path.verify();
 
+            // PATH CALCULATION MODE
             } else if (cmd.hasOption("i") || cmd.hasOption("input")) {
 
-                // PATH CALCULATION MODE
                 logger.info("** Path calculation mode");
 
+                // User-selected algorithm
                 if (cmd.hasOption("m") || cmd.hasOption("method")) {
 
-                    // User-selected algorithm
                     String algorithmName = cmd.getOptionValue("m");
                     algorithm = AlgorithmRegistry.getAlgorithm(algorithmName, maze);
 
-                } else {
-
-                    // Default to right-hand algorithm
-                    algorithm = new RightHand(maze);
-
-                }
+                // Default to right-hand algorithm
+                } else { algorithm = new RightHand(maze); }
 
                 List<Character> result = algorithm.pathComp();
                 Display.factorDisp(result);
