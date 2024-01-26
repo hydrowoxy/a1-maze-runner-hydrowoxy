@@ -1,5 +1,7 @@
 package ca.mcmaster.se2aa4.mazerunner;
+
 import java.awt.Point;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -8,6 +10,12 @@ public class VerifyPath extends Traversal {
     private String inputPath;
     private static final Logger logger = LogManager.getLogger(VerifyPath.class);
 
+    /**
+     * Constructor
+     * 
+     * @param inputPath The path to verify.
+     * @param maze The maze through which to verify the path.
+     */
     public VerifyPath(String inputPath, Maze maze){ 
         super(maze);
         this.inputPath = inputPath;
@@ -29,16 +37,16 @@ public class VerifyPath extends Traversal {
             // Step through the given path
             for (char instruction : pathStr.toCharArray()) {
                 switch (instruction) {
-                    case 'R':
+                    case RIGHT:
                             turnRight();
                             break;
-                    case 'F':
+                    case FORWARD:
                         // Only move forward if you aren't going into a wall
                         if(toFwd(p) != '#'){ 
                             moveFwd(p);
                             break;
                         }else{break;}
-                    case 'L':
+                    case LEFT:
                             turnLeft();
                             break;
                     default:
@@ -92,16 +100,20 @@ public class VerifyPath extends Traversal {
         runPath(start, inputPath);
     }
 
-     /**
+    /**
      * Checks if the input path string is valid.
-     * i.e., it contains only F,R,L characters (upper or lowercase), digits, and spaces, 
-     * and does not end on a number.
+     * i.e., it contains only FORWARD, RIGHT, LEFT characters (as assigned in
+     * Traversal), digits, and spaces, and does not end on a number.
      * 
      * @param pathStr The string representation of the path to be validated.
      * @return True if the path is valid; false otherwise.
      */
-    private boolean isValid(String pathStr){
-        return pathStr.matches("^[FfLlRr\\d\\s]+$") && !Character.isDigit(pathStr.charAt(pathStr.length() - 1));
+    private boolean isValid(String pathStr) {
+        char[] allowedChars = { FORWARD, RIGHT, LEFT };
+        boolean isValid = pathStr.chars().allMatch(c -> new String(allowedChars).indexOf(c) != -1 || Character.isDigit(c) || c == ' ');
+        isValid = isValid && !Character.isDigit(pathStr.charAt(pathStr.length() - 1));
+        return isValid;
+
     }
 
 }

@@ -2,10 +2,12 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+
 import java.awt.Point;
 
 public class Maze {
@@ -13,8 +15,10 @@ public class Maze {
     private char[][] mazeArr;
     private static final Logger logger = LogManager.getLogger(Maze.class);
 
-    public Maze() {
-    }
+    /**
+     * Constructor
+     */
+    public Maze() {}
 
     /**
      * Reads the maze from the specified input file.
@@ -38,7 +42,6 @@ public class Maze {
 
         reader.close();
         reader = new BufferedReader(new FileReader(inputFile));
-
  
             mazeArr = new char[rows][maxCols];
 

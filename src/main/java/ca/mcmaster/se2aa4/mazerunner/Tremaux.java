@@ -1,21 +1,28 @@
- /*
- * Link I used to learn about Tremaux's algorithm: https://en.wikipedia.org/wiki/Maze-solving_algorithm
- */
+/*
+* Link I used to learn about Tremaux's algorithm: https://en.wikipedia.org/wiki/Maze-solving_algorithm
+*/
 
 package ca.mcmaster.se2aa4.mazerunner;
+
 import java.awt.Point;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Tremaux extends Algorithm {
     Point initialPoint = new Point(start);
 
+    /**
+     * Constructor
+     * 
+     * @param maze The maze to solve.
+     */
     public Tremaux(Maze maze) {
         super(maze);
-        this.steps = new ArrayList<>(); 
+        this.steps = new ArrayList<>();
     }
 
-     /**
+    /**
      * Implements the Tremaux algorithm to find a path through the maze.
      * 
      * @param start The starting point in the maze.
@@ -34,7 +41,7 @@ public class Tremaux extends Algorithm {
         return steps;
     }
 
-     /**
+    /**
      * Checks if the current point is at a junction in the maze.
      * 
      * @param p The current point in the maze.
@@ -43,29 +50,33 @@ public class Tremaux extends Algorithm {
     private boolean atJunction(Point p) {
         // Avoid going out of bounds by checking behind yourself at the start point
         // Start tile is never a junction
-        if (p.x == 0) { return false; }
+        if (p.x == 0) {
+            return false;
+        }
 
         int countPaths = 0;
 
-        if (toFwd(p) != '#') { 
-            countPaths++; 
+        if (toFwd(p) != '#') {
+            countPaths++;
         }
-        if (toRight(p) != '#') { 
-            countPaths++; 
+        if (toRight(p) != '#') {
+            countPaths++;
         }
-        // A straight line with front and back available is not a junction, but a corner is
-        if (toBehind(p) != '#' && toFwd(p) == '#') { 
-            countPaths++; 
-        } 
-        if (toLeft(p) != '#') { 
-            countPaths++; 
+        // A straight line with front and back available is not a junction, but a corner
+        // is
+        if (toBehind(p) != '#' && toFwd(p) == '#') {
+            countPaths++;
+        }
+        if (toLeft(p) != '#') {
+            countPaths++;
         }
 
         return countPaths > 1;
     }
 
-     /**
-     * Handles the Tremaux logic when the algorithm encounters a junction in the maze.
+    /**
+     * Handles the Tremaux logic when the algorithm encounters a junction in the
+     * maze.
      * 
      * @param p The current point in the maze.
      */
@@ -81,16 +92,18 @@ public class Tremaux extends Algorithm {
             moveFwd(p);
         }
 
-        if (anyPossibleBlank(p)) { 
-            goBlank(p); 
-        } else { 
+        if (anyPossibleBlank(p)) {
+            goBlank(p);
+        } else {
             doubleCross(p);
         }
     }
 
-     /**
-     * Handles the Tremaux logic when the algorithm encounters a non-junction point in the maze.
-     * Just go forward; mark double-crosses accordingly; turn around if you hit a wall.
+    /**
+     * Handles the Tremaux logic when the algorithm encounters a non-junction point
+     * in the maze.
+     * Just go forward; mark double-crosses accordingly; turn around if you hit a
+     * wall.
      * 
      * @param p The current point in the maze.
      */
@@ -99,8 +112,8 @@ public class Tremaux extends Algorithm {
 
         switch (tile) {
             case ' ':
-            moveFwd(p);
-            break;
+                moveFwd(p);
+                break;
             case 'O':
                 moveFwd(p);
                 markDoubleCrossed(p);
@@ -114,7 +127,7 @@ public class Tremaux extends Algorithm {
         }
     }
 
-     /**
+    /**
      * Looks around given point to see if any directions have never been crossed.
      * 
      * @param p The current point in the maze.
@@ -124,7 +137,7 @@ public class Tremaux extends Algorithm {
         return toFwd(p) == ' ' || toRight(p) == ' ' || toLeft(p) == ' ';
     }
 
-     /**
+    /**
      * Moves the algorithm forward on a blank path from the given point.
      * Marks the path as once-crossed ('O').
      * 
@@ -145,7 +158,7 @@ public class Tremaux extends Algorithm {
         markSingleCrossed(p);
     }
 
-     /**
+    /**
      * Moves the algorithm forward on a once-crossed path from the given point.
      * Marks the path as double-crossed ('X').
      * 
@@ -154,7 +167,7 @@ public class Tremaux extends Algorithm {
     private void doubleCross(Point p) {
 
         // Prefer to go back the way you came
-        if (toBehind(p) == 'O') { 
+        if (toBehind(p) == 'O') {
             turnRight();
             turnRight();
             moveFwd(p);
@@ -179,39 +192,39 @@ public class Tremaux extends Algorithm {
         mazeArr[(int) p.getY()][(int) p.getX()] = 'O';
     }
 
-     /**
+    /**
      * Retraces the steps taken by the algorithm to find the solution path.
      * 
      * @param p The initial starting point of the maze.
      */
-    private void retraceSteps(Point p){
-        
+    private void retraceSteps(Point p) {
+
         while (p.x != endCol) {
-            
-        // Prefer to follow Os
-            if(toFwd(p) == 'O'){
+
+            // Prefer to follow Os
+            if (toFwd(p) == 'O') {
                 moveFwd(p);
                 steps.add(FORWARD);
-            }else if (toRight(p) == 'O'){
+            } else if (toRight(p) == 'O') {
                 turnRight();
                 steps.add(RIGHT);
-            }else if (toLeft(p) == 'O'){
+            } else if (toLeft(p) == 'O') {
                 turnLeft();
                 steps.add(LEFT);
 
-        // Otherwise follow the blank spaces
-            }else if(toFwd(p) == ' '){
+                // Otherwise follow the blank spaces
+            } else if (toFwd(p) == ' ') {
                 moveFwd(p);
                 steps.add(FORWARD);
-            }else if(toRight(p) == ' '){
+            } else if (toRight(p) == ' ') {
                 turnRight();
                 steps.add(RIGHT);
-            }else if(toLeft(p) == ' '){
+            } else if (toLeft(p) == ' ') {
                 turnLeft();
                 steps.add(LEFT);
 
-        // Dead end, turn around
-            }else{ 
+                // Dead end, turn around
+            } else {
                 turnRight();
                 steps.add(RIGHT);
                 turnRight();

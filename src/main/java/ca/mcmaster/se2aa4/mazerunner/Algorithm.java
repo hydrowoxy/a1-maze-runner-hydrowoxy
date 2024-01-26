@@ -1,19 +1,28 @@
 package ca.mcmaster.se2aa4.mazerunner;
+
 import java.util.List;
+
 import java.awt.Point;
 
 public abstract class Algorithm extends Traversal {
 
     protected List<Character> steps;
 
-    protected static final char FORWARD = 'F';
-    protected static final char RIGHT = 'R';
-    protected static final char LEFT = 'L';
-
     public Algorithm(Maze maze) { super(maze); }
 
+    /**
+     * To implement the algorithm logic 
+     * 
+     * @param p The starting point in the maze
+     * @return The list of steps taken to solve the maze
+     */
     protected abstract List<Character> algorithm(Point p);
 
+    /**
+     * Executes the logic to solve the maze
+     * 
+     * @return The list of steps taken to solve the maze
+     */
     public List<Character> pathComp() { return algorithm(start); }
 
 }

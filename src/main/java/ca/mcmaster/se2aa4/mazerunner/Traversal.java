@@ -1,3 +1,7 @@
+/*
+ * Link I used to learn about Point: https://docs.oracle.com/javase/8/docs/api/java/awt/Point.html
+ */
+
 package ca.mcmaster.se2aa4.mazerunner;
 import java.awt.Point;
 
@@ -10,23 +14,47 @@ public abstract class Traversal {
         NORTH, EAST, SOUTH, WEST
     }
 
+    /**
+     * Choose how to represent each direction in the path string
+     */
+    protected static final char FORWARD = 'F';
+    protected static final char RIGHT = 'R';
+    protected static final char LEFT = 'L';
+
     protected Directions fwd = Directions.EAST;
 
+    /**
+     * Constructor
+     * 
+     * @param maze The maze to be explored
+     */
     public Traversal(Maze maze){
         this.mazeArr = maze.getMazeArr();
         this.start = maze.getStartPoint();
         this.endCol = maze.getEndCol();
     }
 
+    /**
+     * Turns the explorer right
+     */
     protected void turnRight() {
         fwd = Directions.values()[(fwd.ordinal() + 1) % 4];
     }
 
+    /**
+     * Turns the explorer left
+     */
     protected void turnLeft() {
         fwd = Directions.values()[(fwd.ordinal() + 3) % 4];
 
     }
 
+    /**
+     * Checks what is to the right of the explorer
+     * 
+     * @param p The current point
+     * @return The character to the right of the point
+     */
     protected char toRight(Point p) {
         switch (fwd) {
             case NORTH:
@@ -40,6 +68,12 @@ public abstract class Traversal {
         }
     }
 
+    /**
+     * Checks what is in front of the explorer 
+     * 
+     * @param p The current point
+     * @return The character in front of the point
+     */
     protected char toFwd(Point p) {
         switch (fwd) {
             case NORTH:
@@ -53,6 +87,12 @@ public abstract class Traversal {
         }
     }
 
+    /**
+     * Checks what is to the left of the explorer
+     * 
+     * @param p The current point
+     * @return The character to the left of the point
+     */
     protected char toLeft(Point p) {
         switch (fwd) {
             case NORTH:
@@ -66,6 +106,12 @@ public abstract class Traversal {
         }
     }
 
+    /**
+     * Checks what is behind the explorer 
+     * 
+     * @param p The current point
+     * @return The character behind the point
+     */
     protected char toBehind(Point p) {
         switch (fwd) {
             case NORTH:
@@ -79,6 +125,11 @@ public abstract class Traversal {
         }
     }
 
+    /**
+     * Moves the explorer forwards
+     * 
+     * @param p The current point
+     */
     protected void moveFwd(Point p) {
         switch (fwd) {
             case NORTH:
