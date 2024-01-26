@@ -2,10 +2,10 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
-
+import java.io.IOException;
 import java.awt.Point;
 
 public class Maze {
@@ -13,55 +13,51 @@ public class Maze {
     private char[][] mazeArr;
     private static final Logger logger = LogManager.getLogger(Maze.class);
 
-    public Maze(){} 
+    public Maze() {
+    }
 
-     /**
+    /**
      * Reads the maze from the specified input file.
      * 
      * @param inputFile The path to the file containing the maze structure.
+     * @throws FileNotFoundException The system can not find the input file
+     * @throws IOException There was an issue reading the file
      */
-    public void read(String inputFile) {
-        try {
-            if(!isValid(inputFile)){
-                logger.error("Invalid maze input.");
-            } else {
-                logger.info("**** Reading the maze from file " + inputFile);
+    public void read(String inputFile) throws FileNotFoundException, IOException {
+        logger.info("**** Reading the maze from file " + inputFile);
 
-                BufferedReader reader = new BufferedReader(new FileReader(inputFile));
-                String line;
-                int rows = 0;
-                int maxCols = 0;
-        
-                while ((line = reader.readLine()) != null) {
-                    rows++;
-                    maxCols = Math.max(maxCols, line.length());
-                }
-        
-                reader.close();
-                reader = new BufferedReader(new FileReader(inputFile));
-        
-                mazeArr = new char[rows][maxCols];
-        
-                int currentRow = 0;
-                while ((line = reader.readLine()) != null) {
-                    char[] rowChars = line.toCharArray();
-                    for (int col = 0; col < maxCols; col++) {
-                        mazeArr[currentRow][col] = (col < rowChars.length) ? rowChars[col] : ' ';
-                    }
-                    currentRow++;
-                }
-            }
-        } catch (Exception e) {
-            logger.error("/!\\ An error has occurred while reading the file /!\\");
-            e.printStackTrace();
+        BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+        String line;
+        int rows = 0;
+        int maxCols = 0;
+
+        while ((line = reader.readLine()) != null) {
+            rows++;
+            maxCols = Math.max(maxCols, line.length());
         }
+
+        reader.close();
+        reader = new BufferedReader(new FileReader(inputFile));
+
+ 
+            mazeArr = new char[rows][maxCols];
+
+            int currentRow = 0;
+            while ((line = reader.readLine()) != null) {
+                char[] rowChars = line.toCharArray();
+                for (int col = 0; col < maxCols; col++) {
+                    mazeArr[currentRow][col] = (col < rowChars.length) ? rowChars[col] : ' ';
+                }
+                currentRow++;
+            }
+        
     }
 
     public char[][] getMazeArr() {
         return mazeArr;
     }
 
-     /**
+    /**
      * Finds and returns the starting point of the maze.
      * 
      * @return The starting point as a Point object.
@@ -75,7 +71,7 @@ public class Maze {
         return null;
     }
 
-     /**
+    /**
      * Retrieves the column index of the last column in the maze.
      * 
      * @return The column index of the last column in the maze.
@@ -85,15 +81,6 @@ public class Maze {
             return -1;
         }
         return mazeArr[0].length - 1;
-    }
-    /**
-     * Checks if the input file is a .txt file.
-     * 
-     * @param inputFile The path to the file to be checked.
-     * @return true if the file is a valid text file; otherwise, false.
-     */
-    private boolean isValid(String inputFile){
-        return inputFile != null && inputFile.toLowerCase().endsWith(".txt");
     }
 
 }

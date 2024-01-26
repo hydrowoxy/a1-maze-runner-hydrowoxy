@@ -1,8 +1,8 @@
 package ca.mcmaster.se2aa4.mazerunner;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import org.apache.commons.cli.*;
@@ -14,9 +14,9 @@ public class Main {
     public static void main(String[] args) {
 
         Options options = new Options();
-        options.addOption("i", "input", true, "Input maze file");
-        options.addOption("p", "path", true, "Input path (to be verified)");
-        options.addOption("m", "method", true, "Path calculation method");
+            options.addOption("i", "input", true, "Input maze file");
+            options.addOption("p", "path", true, "Input path (to be verified)");
+            options.addOption("m", "method", true, "Path calculation method");
 
         CommandLineParser parser = new DefaultParser();
 
@@ -65,6 +65,10 @@ public class Main {
 
         } catch (ParseException e) {
             logger.error("Error parsing command line options: " + e.getMessage());
+        } catch (FileNotFoundException e) {
+            logger.error("Maze file not found: " + e.getMessage());
+        } catch (IOException e) {
+            logger.error("Error accessing maze file: " + e.getMessage());
         }
 
     }
