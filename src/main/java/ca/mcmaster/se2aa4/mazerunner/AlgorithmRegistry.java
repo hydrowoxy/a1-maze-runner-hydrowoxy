@@ -1,7 +1,8 @@
 /*
  * Links I used to learn about HashMap: https://www.w3schools.com/java/java_hashmap.asp
- *                            getDeclaredConstructor: https://www.tutorialspoint.com/java/lang/class_getdeclaredconstructor.htm
- *                            newInstance: https://www.tutorialspoint.com/java/lang/class_getdeclaredconstructor.htm
+ *                             getDeclaredConstructor: https://www.tutorialspoint.com/java/lang/class_getdeclaredconstructor.htm
+ *                             newInstance: https://www.tutorialspoint.com/java/lang/class_getdeclaredconstructor.htm
+ *                             static blocks: https://www.javatpoint.com/static-block-in-java
  */
 
 package ca.mcmaster.se2aa4.mazerunner;
