@@ -47,7 +47,7 @@ public class Maze {
         }
 
         int rows = rowsList.size();
-        int cols = (rows > 0) ? rowsList.get(0).length : 0;
+        int cols = rowsList.get(0).length;
 
         mazeArr = new char[rows][cols];
 
