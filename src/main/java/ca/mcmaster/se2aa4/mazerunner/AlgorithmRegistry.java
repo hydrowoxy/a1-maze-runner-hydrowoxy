@@ -7,8 +7,6 @@
 
 package ca.mcmaster.se2aa4.mazerunner;
 
-import java.lang.reflect.InvocationTargetException;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,7 +41,7 @@ public class AlgorithmRegistry {
         if (algorithmClass != null) {
             try {
                 return algorithmClass.getDeclaredConstructor(Maze.class).newInstance(maze);
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            } catch (Exception e) {
                 logger.error("Error creating an instance of the algorithm: " + algorithmName, e);
             }
         } else {

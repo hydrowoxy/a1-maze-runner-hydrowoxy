@@ -4,7 +4,6 @@
 
 package ca.mcmaster.se2aa4.mazerunner;
 import java.awt.Point;
-import java.util.List;
 
 public abstract class Traversal {
     protected char[][] mazeArr;
@@ -21,8 +20,6 @@ public abstract class Traversal {
     protected static final char FORWARD = 'F';
     protected static final char RIGHT = 'R';
     protected static final char LEFT = 'L';
-
-    protected List<Character> steps;
 
     protected Directions fwd = Directions.EAST;
 
