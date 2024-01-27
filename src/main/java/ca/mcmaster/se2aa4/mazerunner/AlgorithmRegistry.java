@@ -17,6 +17,12 @@ public class AlgorithmRegistry {
     private static final Map<String, Class<? extends Algorithm>> ALGORITHMS = new HashMap<>();
     private static final Logger logger = LogManager.getLogger(AlgorithmRegistry.class);
 
+    /**
+     * Stores available algorithms
+     * 
+     * key: Command line argument to recognize
+     * value: Corresponding algorithm class to call
+     */
     static {
         ALGORITHMS.put("righthand", RightHand.class);
         ALGORITHMS.put("tremaux", Tremaux.class);
@@ -26,9 +32,8 @@ public class AlgorithmRegistry {
      * Retrieves an instance of the specified algorithm for the given maze.
      * 
      * @param algorithmName The name of the algorithm to retrieve.
-     * @param maze          The maze to which the algorithm will be applied.
-     * @return An instance of the specified algorithm. Defaults to Right-Hand
-     *         algorithm.
+     * @param maze The maze to which the algorithm will be applied.
+     * @return An instance of the specified algorithm. Defaults to Right-Hand.
      */
     public static Algorithm getAlgorithm(String algorithmName, Maze maze) {
         Class<? extends Algorithm> algorithmClass = ALGORITHMS.get(algorithmName.toLowerCase());

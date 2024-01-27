@@ -62,8 +62,8 @@ public class Tremaux extends Algorithm {
         if (toRight(p) != '#') {
             countPaths++;
         }
-        // A straight line with front and back available is not a junction, but a corner
-        // is
+        // A straight line with front and back available is not a junction, 
+        // but a corner is
         if (toBehind(p) != '#' && toFwd(p) == '#') {
             countPaths++;
         }
@@ -75,8 +75,7 @@ public class Tremaux extends Algorithm {
     }
 
     /**
-     * Handles the Tremaux logic when the algorithm encounters a junction in the
-     * maze.
+     * Handles the Tremaux logic when the algorithm encounters a junction.
      * 
      * @param p The current point in the maze.
      */
@@ -102,8 +101,7 @@ public class Tremaux extends Algorithm {
     /**
      * Handles the Tremaux logic when the algorithm encounters a non-junction point
      * in the maze.
-     * Just go forward; mark double-crosses accordingly; turn around if you hit a
-     * wall.
+     * Go forward; mark double-crosses accordingly; turn around if you hit a wall.
      * 
      * @param p The current point in the maze.
      */
@@ -212,7 +210,7 @@ public class Tremaux extends Algorithm {
                 turnLeft();
                 steps.add(LEFT);
 
-                // Otherwise follow the blank spaces
+            // Otherwise follow the blank spaces
             } else if (toFwd(p) == ' ') {
                 moveFwd(p);
                 steps.add(FORWARD);
@@ -223,7 +221,7 @@ public class Tremaux extends Algorithm {
                 turnLeft();
                 steps.add(LEFT);
 
-                // Dead end, turn around
+            // Dead end, turn around
             } else {
                 turnRight();
                 steps.add(RIGHT);

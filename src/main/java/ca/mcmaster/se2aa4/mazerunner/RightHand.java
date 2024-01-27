@@ -31,6 +31,7 @@ public class RightHand extends Algorithm {
     protected List<Character> algorithm(Point p) {
 
         while (p.x != endCol) {
+            // If the thing to the right of you is a wall
             if(toRight(p) == '#'){
                 if (toFwd(p) != '#') {
                     moveFwd(p);
@@ -44,6 +45,8 @@ public class RightHand extends Algorithm {
                     turnRight();
                     steps.add(RIGHT);
                 }
+            // Otherwise you need to get back on track so your 
+            // "right hand" is on the wall (i.e. wall to your right)
             }else if (toRight(p) != '#'){
                 turnRight();
                 steps.add(RIGHT);
@@ -51,9 +54,7 @@ public class RightHand extends Algorithm {
                 steps.add(FORWARD);
             }
         }
-
         return steps;
-
     }
     
 }

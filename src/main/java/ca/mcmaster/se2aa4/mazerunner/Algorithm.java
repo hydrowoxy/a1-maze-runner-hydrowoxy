@@ -8,6 +8,11 @@ public abstract class Algorithm extends Traversal {
 
     protected List<Character> steps;
 
+    /**
+     * Constructor 
+     * 
+     * @param maze The maze to traverse using the algorithm
+     */
     public Algorithm(Maze maze) { super(maze); }
 
     /**

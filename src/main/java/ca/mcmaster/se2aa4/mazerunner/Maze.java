@@ -1,3 +1,7 @@
+/**
+ * Link I used to learn about System.arraycopy: https://www.tutorialspoint.com/java/lang/system_arraycopy.htm
+ */
+
 package ca.mcmaster.se2aa4.mazerunner;
 
 import org.apache.logging.log4j.LogManager;
@@ -7,7 +11,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.Point;
 
 public class Maze {
@@ -18,44 +23,45 @@ public class Maze {
     /**
      * Constructor
      */
-    public Maze() {}
+    public Maze() {
+    }
 
     /**
      * Reads the maze from the specified input file.
      * 
      * @param inputFile The path to the file containing the maze structure.
-     * @throws FileNotFoundException The system can not find the input file
-     * @throws IOException There was an issue reading the file
+     * @throws FileNotFoundException The system can not find the input file.
+     * @throws IOException There was an issue reading the file.
      */
     public void read(String inputFile) throws FileNotFoundException, IOException {
         logger.info("**** Reading the maze from file " + inputFile);
 
-        BufferedReader reader = new BufferedReader(new FileReader(inputFile));
-        String line;
-        int rows = 0;
-        int maxCols = 0;
+        List<char[]> rowsList = new ArrayList<>();
 
-        while ((line = reader.readLine()) != null) {
-            rows++;
-            maxCols = Math.max(maxCols, line.length());
-        }
-
-        reader.close();
-        reader = new BufferedReader(new FileReader(inputFile));
- 
-            mazeArr = new char[rows][maxCols];
-
-            int currentRow = 0;
+        try (BufferedReader reader = new BufferedReader(new FileReader(inputFile))) {
+            String line;
             while ((line = reader.readLine()) != null) {
                 char[] rowChars = line.toCharArray();
-                for (int col = 0; col < maxCols; col++) {
-                    mazeArr[currentRow][col] = (col < rowChars.length) ? rowChars[col] : ' ';
-                }
-                currentRow++;
+                rowsList.add(rowChars);
             }
-        
+        }
+
+        int rows = rowsList.size();
+        int cols = (rows > 0) ? rowsList.get(0).length : 0;
+
+        mazeArr = new char[rows][cols];
+
+        for (int i = 0; i < rows; i++) {
+            char[] rowChars = rowsList.get(i);
+            System.arraycopy(rowChars, 0, mazeArr[i], 0, cols);
+        }
     }
 
+    /**
+     * Retrieves the 2D array representation of the maze.
+     * 
+     * @return The 2D array representation of the maze.
+     */
     public char[][] getMazeArr() {
         return mazeArr;
     }
@@ -80,9 +86,6 @@ public class Maze {
      * @return The column index of the last column in the maze.
      */
     public int getEndCol() {
-        if (mazeArr == null || mazeArr.length == 0 || mazeArr[0].length == 0) {
-            return -1;
-        }
         return mazeArr[0].length - 1;
     }
 
