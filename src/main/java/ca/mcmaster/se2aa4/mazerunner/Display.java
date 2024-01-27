@@ -5,22 +5,7 @@ import java.util.List;
 public class Display {
 
      /**
-     * Displays a list of characters representing a path in canonical form.
-     * Ex. FFRLFLLRRR
-     *
-     * @param steps A list of characters describing a path
-     */
-    public static void canonDisp(List<Character> steps) {
-        StringBuilder result = new StringBuilder();
-        for (char step : steps) {
-            result.append(step);
-        }
-        System.out.println(result.toString());
-    }
-
-     /**
      * Displays a list of characters representing a path in factorized form.
-     * Ex. 2FRLF2L3R
      *
      * @param steps A list of characters describing a path
      */
@@ -32,8 +17,10 @@ public class Display {
         int count = 1;
     
         for (int i = 1; i < steps.size(); i++) {
+            // Same char
             if (steps.get(i) == currentChar) {
                 count++;
+            // Different char
             } else {
                 if (count > 1) {result.append(count);}
                 result.append(currentChar);
@@ -41,7 +28,7 @@ public class Display {
                 currentChar = steps.get(i);
             }
         }
-
+        // Last character
         if (count > 1) {result.append(count);}
         result.append(currentChar);
         System.out.println(result.toString());

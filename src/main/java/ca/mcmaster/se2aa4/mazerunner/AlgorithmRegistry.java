@@ -1,5 +1,7 @@
 /*
- * Link I used to learn about HashMap: https://www.w3schools.com/java/java_hashmap.asp
+ * Links I used to learn about HashMap: https://www.w3schools.com/java/java_hashmap.asp
+ *                            getDeclaredConstructor: https://www.tutorialspoint.com/java/lang/class_getdeclaredconstructor.htm
+ *                            newInstance: https://www.tutorialspoint.com/java/lang/class_getdeclaredconstructor.htm
  */
 
 package ca.mcmaster.se2aa4.mazerunner;
@@ -36,7 +38,7 @@ public class AlgorithmRegistry {
      * @return An instance of the specified algorithm. Defaults to Right-Hand.
      */
     public static Algorithm getAlgorithm(String algorithmName, Maze maze) {
-        Class<? extends Algorithm> algorithmClass = ALGORITHMS.get(algorithmName.toLowerCase());
+        Class<? extends Algorithm> algorithmClass = ALGORITHMS.get(algorithmName);
         if (algorithmClass != null) {
             try {
                 return algorithmClass.getDeclaredConstructor(Maze.class).newInstance(maze);

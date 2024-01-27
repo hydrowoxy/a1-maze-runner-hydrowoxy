@@ -75,12 +75,13 @@ public class Tremaux extends Algorithm {
     }
 
     /**
-     * Handles the Tremaux logic when the algorithm encounters a junction.
+     * Handles the Tremaux logic when the explorer is at a junction.
      * 
      * @param p The current point in the maze.
      */
     private void handleJunction(Point p) {
 
+        // Mark the entrance as single-crossed if it's blank
         if (toBehind(p) == ' ') {
             turnRight();
             turnRight();
@@ -91,6 +92,7 @@ public class Tremaux extends Algorithm {
             moveFwd(p);
         }
 
+        // Prefer to go to a blank tile otherwise double-cross
         if (anyPossibleBlank(p)) {
             goBlank(p);
         } else {
@@ -99,9 +101,7 @@ public class Tremaux extends Algorithm {
     }
 
     /**
-     * Handles the Tremaux logic when the algorithm encounters a non-junction point
-     * in the maze.
-     * Go forward; mark double-crosses accordingly; turn around if you hit a wall.
+     * Handles the Tremaux logic when the explorer isn't at a junction.
      * 
      * @param p The current point in the maze.
      */
@@ -109,13 +109,16 @@ public class Tremaux extends Algorithm {
         char tile = toFwd(p);
 
         switch (tile) {
+            // Forward clear, go forward
             case ' ':
                 moveFwd(p);
                 break;
+            // Forward has been crossed once, go forward and double-cross
             case 'O':
                 moveFwd(p);
                 markDoubleCrossed(p);
                 break;
+            // Wall, turn around
             case '#':
                 turnRight();
                 turnRight();
