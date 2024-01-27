@@ -5,7 +5,7 @@ import java.util.List;
 import java.awt.Point;
 
 public abstract class Algorithm extends Traversal {
-
+    
     protected List<Character> steps;
 
     /**

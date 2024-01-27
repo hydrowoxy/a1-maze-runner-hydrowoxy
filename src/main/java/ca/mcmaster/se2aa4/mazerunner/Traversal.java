@@ -149,3 +149,5 @@ public abstract class Traversal {
     }
 
 }
+
+// Maybe make some variables for WALL, SPACE so it's not hard coded to recognize # and ' '

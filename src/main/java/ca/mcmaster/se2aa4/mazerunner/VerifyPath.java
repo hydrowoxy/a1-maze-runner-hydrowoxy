@@ -23,7 +23,6 @@ public class VerifyPath extends Traversal {
      * @param pathStr The string representation of the path to be executed.
      */
     private void runPath(Point p, String pathStr) {
-
             pathStr = clean(pathStr);
 
             // Step through the given path
@@ -70,15 +69,11 @@ public class VerifyPath extends Traversal {
             if (Character.isDigit(c)) {countStr.append(c);} 
             
             else {
-
                 if (countStr.length() > 0) {
-
                     int count = Integer.parseInt(countStr.toString());
                     for (int i = 0; i < count; i++) {result.append(c);}
                     countStr.setLength(0); 
-
                 } else {result.append(c);}
-
             }
         }
         return result.toString();

@@ -67,11 +67,11 @@ public class Main {
             logger.info("** End of MazeRunner");
 
         } catch (ParseException e) {
-            logger.error("Error parsing command line options: " + e.getMessage());
+            logger.error("/!\\ Error parsing command line options /!\\: " + e.getMessage());
         } catch (FileNotFoundException e) {
-            logger.error("Maze file not found: " + e.getMessage());
+            logger.error("/!\\ Maze file not found /!\\: " + e.getMessage());
         } catch (IOException e) {
-            logger.error("Error accessing maze file: " + e.getMessage());
+            logger.error("/!\\ Error accessing maze file /!\\: " + e.getMessage());
         }
 
     }
