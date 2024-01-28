@@ -11,7 +11,6 @@ import java.util.List;
 
 public class Tremaux extends Algorithm {
     Point initialPoint = new Point(start);
-
     /**
      * Constructor
      * 
@@ -28,7 +27,8 @@ public class Tremaux extends Algorithm {
      * @param start The starting point in the maze.
      * @return A list of characters representing the steps taken to solve the maze.
      */
-    @Override
+    
+     @Override
     protected List<Character> algorithm(Point p) {
         while (p.x != endCol) {
             if (atJunction(p)) {
@@ -146,15 +146,17 @@ public class Tremaux extends Algorithm {
      */
     private void goBlank(Point p) {
 
-        if (toFwd(p) == ' ') {
-            moveFwd(p);
-        } else if (toRight(p) == ' ') {
+        // In case the end is a junction, prefer to
+        // turn one way or another to reach the exit
+        if (toRight(p) == ' ') {
             turnRight();
             moveFwd(p);
         } else if (toLeft(p) == ' ') {
             turnLeft();
             moveFwd(p);
-        }
+        } else if (toFwd(p) == ' ') {
+            moveFwd(p);
+        } 
 
         markSingleCrossed(p);
     }
@@ -186,11 +188,11 @@ public class Tremaux extends Algorithm {
     }
 
     private void markDoubleCrossed(Point p) {
-        mazeArr[(int) p.getY()][(int) p.getX()] = 'X';
+            mazeArr[(int) p.getY()][(int) p.getX()] = 'X';
     }
 
     private void markSingleCrossed(Point p) {
-        mazeArr[(int) p.getY()][(int) p.getX()] = 'O';
+            mazeArr[(int) p.getY()][(int) p.getX()] = 'O';
     }
 
     /**
@@ -199,7 +201,6 @@ public class Tremaux extends Algorithm {
      * @param p The initial starting point of the maze.
      */
     private void retraceSteps(Point p) {
-
         while (p.x != endCol) {
 
             // Prefer to follow Os
@@ -209,12 +210,12 @@ public class Tremaux extends Algorithm {
             } else if (toRight(p) == 'O') {
                 turnRight();
                 steps.add(RIGHT);
-            } else if (toLeft(p) == 'O') {
+            } else if (toLeft(p) == 'O') {;
                 turnLeft();
                 steps.add(LEFT);
 
             // Otherwise follow the blank spaces
-            } else if (toFwd(p) == ' ') {
+            } else if (toFwd(p) == ' ') {   
                 moveFwd(p);
                 steps.add(FORWARD);
             } else if (toRight(p) == ' ') {

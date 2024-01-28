@@ -15,7 +15,7 @@ public abstract class Traversal {
     }
 
     /**
-     * Choose how to represent each direction in the path string
+     * Choose how to represent (and recognize) directions path strings
      */
     protected static final char FORWARD = 'F';
     protected static final char RIGHT = 'R';
@@ -150,4 +150,3 @@ public abstract class Traversal {
 
 }
 
-// Maybe make some variables for WALL, SPACE so it's not hard coded to recognize # and ' '
