@@ -1,3 +1,7 @@
+/**
+ * Link I used to learn about Commons cli: https://commons.apache.org/proper/commons-cli/usage.html
+ */
+
 package ca.mcmaster.se2aa4.mazerunner;
 
 import org.apache.logging.log4j.LogManager;
